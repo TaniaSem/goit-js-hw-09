@@ -16,3 +16,25 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 150px;
+}
+
+.btn-container button {
+  width: 120px;
+  height: 60px;
+  text-align: center;
+  font-size: 25px;
+  font-style: italic;
+  background-color: #e1e1e1;
+  border-radius: 5px;
+  border: 1px transparent solid;
+}
+
+.btn-container button + button {
+  margin-left: 20px;
+}
