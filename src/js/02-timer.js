@@ -35,7 +35,7 @@ const options = {
   },
 };
 
-const flatpickr = new flatpickr('#datetime-picker', options);
+flatpickr('#datetime-picker', options);
 
 refs.startBtn.addEventListener('click', onStartTimer);
 
