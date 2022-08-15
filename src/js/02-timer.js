@@ -27,7 +27,9 @@ const options = {
     if (selectedTime > options.defaultDate) {
       refs.startBtn.disabled = false;
     } else {
-      //   window.alert('Please choose a date in the future');
+      //   window.alert('Please choose a date in the future')
+      refs.startBtn.disabled = true;
+
       Notify.failure('Please choose a date in the future');
     }
 
@@ -39,16 +41,26 @@ flatpickr('#datetime-picker', options);
 
 refs.startBtn.addEventListener('click', onStartTimer);
 
-function onStartTimer() {
-  const startTime = selectedTime.getTime();
-  refs.startBtn.disabled = true;
+let intervalId;
+let deltaTime;
 
-  setInterval(() => {
-    const deltaTime = startTime - Date.now();
+function onStartTimer() {
+  refs.startBtn.disabled = true;
+  intervalId = setInterval(() => {
+    const startTime = selectedTime.getTime();
+    deltaTime = startTime - Date.now();
     const timeComponents = convertMs(deltaTime);
     console.log(timeComponents);
     updateTimerFace(timeComponents);
+    onStopTimer();
   }, 1000);
+}
+
+function onStopTimer() {
+  if (deltaTime === 0 || deltaTime <= 1000) {
+    refs.startBtn.disabled = true;
+    clearInterval(intervalId);
+  }
 }
 
 function updateTimerFace({ days, hours, minutes, seconds }) {
